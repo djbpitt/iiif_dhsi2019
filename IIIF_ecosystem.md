@@ -13,7 +13,7 @@ How to configure local IIIF-related servers, based primarily on information from
 
 ### Ancillary components
 
-1. Access the image API directory, bypassing the presentation API.
+1. Access the image API directly, bypassing the presentation API.
 2. Build a manifest automatically for an entire directory of images.
 3. Create tiles for level 0 static images.
 4. Validate a manifest.
@@ -82,7 +82,7 @@ The presentation API is documented at <https://iiif.io/api/presentation/2.1/>.
 	1. Enter the http or https (not filesystem) URL of your manifest, e.g., <http://127.0.0.1:1234/pmb_manifest.json>.
 	1. Click “load”. Your manifest should be added to the list of those available.
 	1. Click on the new link to your manifest to view your images.
-2. To make the addition stable, edit *example.html" to add your the http or https URI for your manifest, following the pattern of the resources already listed there.
+2. To make the addition stable, edit *example.html* to add your the http or https URI for your manifest, following the pattern of the resources already listed there.
 
 #### About CORS
 

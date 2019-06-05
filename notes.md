@@ -288,5 +288,90 @@ where the value of the `-p` parameter is the port.
 
 Plain ol’ web page, with `<img>` elements that point to IIIF images. To find some images, see <https://searchworks.stanford.edu/catalog?f%5Biiif_resources%5D%5B%5D=available>; click on the Network button to drill down to the manifest and drill down to the image URI there. Kinda laborious, no metadata, not very functional. The point of the exercise is that this *isn’t* the way to build an image gallery.
 
+## 2019-06-05
 
+### Annotations
 
+* GitBook chapter: <https://iiif.github.io/training/iiif-5-day-workshop/day-three/annotations-and-annotation-lists.html>
+* Slides: <https://slides.com/hadro/dhsi-workshop-day-3-annotations>
+
+Almost everything is an *annotation*. Spacially, a *manifest* is hierarchical: *collection* → *manifest* → *sequence* → *canvas* → *content*. The content is *painted onto* the canvas. Multiple canvases can be assembled and ordered in a sequence. The manifest pulls together the canvases and their content in an organized way.
+
+The most important properties are the `@id` values of the manifest, the canvas, and the image resource.
+
+In a manifest, the manifest-level key:value pairs are:
+
+* *@context* specifies the presentation API version and thus declares the available properties. The value must resolve to the appropriate JSON file; it is not intended for human consumption.
+* *@type* declares it to be a manifest, using a namespaced datatype: `sc:Manifest`
+* *@id* is a URI that serves as a unique identifier. It should resolve, and if you move the manifest, you should change the value. (Hmm: the Bodleian manifest editor created the following key:value pair for a manifest: `"@id": "http://9919cd38-9b13-4290-9fe4-d31da31f6cd8"`.) It’s intended as a subject for a LOD triple.
+* *label* is the primary title
+* *description* is more extended, and may include multiple languages as an array of JSON objects that specify `@value` and `@language`
+* *attribution* may be a string identifying the holding institution, but there isn’t always one (e.g., the Internet Archive, where it’s the *contributing* institution). 
+* *logo* is a URL that points to a graphic logo
+* *sequences* is an array of JSON objects. Typically there is one sequence, but there may be more than one.
+
+A sequence may contain the following key:value pairs:
+
+* *@type* is `sc:Sequence`. `@context` is inherited from the top (manifest) level unless overwritten.
+* *canvases* is an array of canvases
+
+A canvas has the following key:value pairs:
+
+* *@type* must be `sc:Canvas`
+* *@id* must be unique and doesn’t have to resolve, but it must be unique. (If it isn’t, it uses only the last value, but this is an error, and not a feature.) Annotations will link to a canvas @id, which should be persistent.
+* *label* is the title for the canvas
+* *width* and *height* of the canvas; not necessarily the width and height of the image painted (annotated) onto the canvas. If the image is larger than the canvas, it will be truncated.
+* *images* has header information:
+	* *@type* has the value `oa:Annotation` (it is annotated onto the canvas)
+	* *motivation* has the value `sc:painting` (the way it is annotated is that it is *painted* onto the canvas)
+	* *on*: the `@id` of the canvas onto which it’s painted. Should be there, and must be there if you aren’t painting onto the entire canvas, but the Bodleian editor doesn’t create it.
+
+*images* contains *resource*, which has:
+
+* *@id* must resolve to IIIF URI, e.g., "http://obdurodon.org:8182/iiif/2/obdurodon.jpg/full/full/0/default.jpg" (size, fragment, etc. may differ)
+* *@type* is `dctypes:Image`
+* *format*, e.g., `image/jpeg` (optional)
+* *service*, header information for the image itself, which is required for IIIF viewers, and is not implemented in all of them:
+	* *@context* pointer to the image API (NB: not the same as manifest @context), specifies what you can ask of or do with the resource. Specifies propertiers and element for JSON-LD. e.g., "http://iiif.io/api/image/2/context.json"
+	* *@id* points to base of image, e.g., "http://obdurodon.org:8182/iiif/2/obdurodon.jpg"
+	* *profile*: for the viewer, e.g., "http://iiif.io/api/image/2/level2.json"
+
+### Demos
+
+* Grandes Chroniques de France - Châteauroux BM ms. 5 
+Démo de reconstitution virtuelle du manuscrit 5 de Châteauroux, <https://demos.biblissima.fr/chateauroux/> reunifies disaggregated manuscript. 
+* Compariscopoe puts multiple images on a canvas. Use <https://vanda.github.io/iiif-features/compariscope.html> with any image resource. Changes the opacity of multiple images in sync and makes it possible to drag and drop them. The canvas has three images painted onto it; the tool is JavaScript that lets you manipulate each of the three separately.
+* States of Mind exhibit at <http://ghp.wellcomecollection.org/annotation-viewer/quilt/#0> layers one image annotation and multiple geometric annotations that describe the pieces. Selecting a geometric annotation zooms into the fragment.
+* The Butler-Bowdon Cope <https://www.vam.ac.uk/articles/the-butler-bowdon-cope>. Click on a plus sign to zoom and crop (adjust the image API) and display an annotation for a particular location (paint another annotation onto the canvas). The viewer is Digirati’s Canvas Panel (<https://github.com/digirati-co-uk/canvas-panel>). *Guided viewing*. A newer version can use a timer to walk the reader through the views.
+* Ten Thousand Rooms (<https://tenthousandrooms.yale.edu/node/106/mirador?canvas=2946>) allows uploads and provides tools to create annotations, served inside a modified version of Mirador. The popup annotations are clickable and display metadata in a sidebar. There’s a dropdown at the top of the annotation panel to toggle among transcription, translation, and other features. You can open multiple annotation sidebars at once.
+
+### Theory
+
+We can paint text onto a canvas the same way we can paint images, and the painting can be onto just a zone on the canvas. And we aren’t limited to just image and text, e.g., the Chopin nocture annotations we saw earlier. See now <https://ddmal.github.io/IIIF-AV-player> (proof of concept, and not entirely valid, since it was completed before 3.0 of the presentation API was finalized). The video is drawn from YouTube (it’s the underlying H.264 stream, not the YouTube player); the highlighting was brute-forced.
+
+To paint onto a *fragment* (an area of a canvas), set "on" to something like "https://bvmm.irht.cnrs.fr/iiif/2309/canvas/canvas-981384#xywh=3949,994,1091,1232". `xywh` is simplest, but other shapes are possible. See the Gallica examples at <https://gist.githubusercontent.com/hadro/44b893d9be9ac31e705f1c034ae61d84/raw/0dd43c7570c3f30cf37385207524304f785a196d/gallica.json>.
+
+Customized version of Mirador: <https://iiif.github.io/training/iiif-5-day-workshop/day-three/mirador.html> that can render customized fragment of manifest. In Mirador, multiple images on a canvas are thought of as layers, and not all layers are rendered automatically. Open side panel and click on tabTitleLayers. The order of annotations matters; do the larger one first.
+
+### Annotation example
+
+* Item: <https://wellcomelibrary.org/moh/report/b18250464>
+* Manifest:
+<https://wellcomelibrary.org/iiif/b18250464/manifest>
+
+Search within the manifest for "otherContent". What do you find there? Where does it fit within the manifest hierarchy?
+
+What you find under "otherContent" is a list of one object with three key:value pairs: @id, @type, and label. The @type value is "sc:annotationList". The @id is an identifier, which has to resolve because it’s where the content is going to be retrieved. 
+
+The annotation list is a JSON file that uses the presentation API as its @context, with @type "sc:annotationList". The resources paint snippets of text onto location on the image. The value of the "on" property is vital.
+
+An annotation list must exist as a separate file; it cannot be embedded in the manifest. Embedding will become possible in version 3. 
+
+IIIF annotation building tool: <https://ncsu-libraries.github.io/iiif-annotation/>.
+
+### Annotation in Mirador
+
+To specify a port for the simple annotation server, use `java -jar dependency/jetty-runner.jar --port 9090 simpleAnnotationStore.war`
+
+Transkribus will identify coordinates for lines. Not IIIF, but can be exported and reformatted.
+`

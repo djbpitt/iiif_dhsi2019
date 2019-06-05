@@ -1,0 +1,18 @@
+{
+    "@context": "http://iiif.io/api/presentation/2/context.json",
+    "@id": "http://localhost/~cantaloupe/annotation-list.json",
+    "@type": "sc:AnnotationList",
+    "resources": [
+        {
+            "@id": "http://localhost/~cantaloupe/annotation-list/1",
+            "@type": "oa:Annotation",
+            "motivation": "sc:painting",
+            "resource": {
+                "@type": "cnt:ContentAsText",
+                "format": "text/plain",
+                "chars": "stuff"
+            },
+            "on": "http://c521d193-17d6-4c9e-88aa-2ba9d2ab41c6#xywh=506,508,322,322"
+        }
+    ]
+}

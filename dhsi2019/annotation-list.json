@@ -1,0 +1,30 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "http://localhost:8887/coin/canvas/AnnotationList",
+  "@type": "sc:AnnotationList",
+  "resources": [
+    {
+      "@id": "http://localhost:8887/coin/list/1",
+      "@type": "oa:Annotation",
+      "motivation": "sc:painting",
+      "resource": {
+        "@type": "cnt:ContentAsText",
+        "format": "text/plain",
+        "chars": "Zeus seated on stool-throne"
+      },
+      "on": "http://localhost:8887/coin/canvas#xywh=3706,208,522,522"
+    },
+    {
+      "@id": "http://localhost:8887/coin/list/2",
+      "@type": "oa:Annotation",
+      "motivation": "sc:painting",
+      "resource": {
+        "@type": "cnt:ContentAsText",
+        "format": "text/plain",
+        "chars": "Eagle in Zeus's hand"
+      },
+      "on": "http://localhost:8887/coin/canvas#xywh=2847,564,495,659"
+      
+    }
+  ]
+}

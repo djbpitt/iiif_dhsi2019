@@ -1,0 +1,102 @@
+{
+    "@context": "http://iiif.io/api/presentation/2/context.json",
+    "@id": "http://9919cd38-9b13-4290-9fe4-d31da31f6cd8",
+    "@type": "sc:Manifest",
+    "label": "Obdurodonia",
+    "metadata": [],
+    "description": [
+        {
+            "@value": "Obdurodon images",
+            "@language": "en"
+        }
+    ],
+    "license": "https://creativecommons.org/licenses/by/3.0/",
+    "attribution": "[Click to edit attribution]",
+    "sequences": [
+        {
+            "@id": "http://a45bca6c-2967-4a39-b2ef-825a47764f4c",
+            "@type": "sc:Sequence",
+            "label": [
+                {
+                    "@value": "Normal Sequence",
+                    "@language": "en"
+                }
+            ],
+            "canvases": [
+                {
+                    "@id": "http://c521d193-17d6-4c9e-88aa-2ba9d2ab41c6",
+                    "@type": "sc:Canvas",
+                    "label": "Obdurodon",
+                    "height": 1002,
+                    "width": 1800,
+                    "images": [
+                        {
+                            "@context": "http://iiif.io/api/presentation/2/context.json",
+                            "@id": "http://3e10c6ee-67f2-4197-b526-d797376064b6",
+                            "@type": "oa:Annotation",
+                            "motivation": "sc:painting",
+                            "resource": {
+                                "@id": "http://obdurodon.org:8182/iiif/2/obdurodon.jpg/full/full/0/default.jpg",
+                                "@type": "dctypes:Image",
+                                "format": "image/jpeg",
+                                "service": {
+                                    "@context": "http://iiif.io/api/image/2/context.json",
+                                    "@id": "http://obdurodon.org:8182/iiif/2/obdurodon.jpg",
+                                    "profile": [
+                                        "http://iiif.io/api/image/2/level2.json",
+                                        {
+                                            "formats": [
+                                                "jpg",
+                                                "tif",
+                                                "gif",
+                                                "png"
+                                            ],
+                                            "maxArea": 1803600,
+                                            "qualities": [
+                                                "bitonal",
+                                                "default",
+                                                "gray",
+                                                "color"
+                                            ],
+                                            "supports": [
+                                                "regionByPx",
+                                                "sizeByW",
+                                                "sizeByWhListed",
+                                                "cors",
+                                                "regionSquare",
+                                                "sizeByDistortedWh",
+                                                "canonicalLinkHeader",
+                                                "sizeByConfinedWh",
+                                                "sizeByPct",
+                                                "jsonldMediaType",
+                                                "regionByPct",
+                                                "rotationArbitrary",
+                                                "sizeByH",
+                                                "baseUriRedirect",
+                                                "rotationBy90s",
+                                                "profileLinkHeader",
+                                                "sizeByForcedWh",
+                                                "sizeByWh",
+                                                "mirroring"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "height": 1002,
+                                "width": 1800
+                            },
+                            "on": "http://c521d193-17d6-4c9e-88aa-2ba9d2ab41c6"
+                        }
+                    ],
+                    "otherContent": [
+                        {
+                            "@id": "http://obdurodon.org/~cantaloupe/annotation-list.json",
+                            "@type": "sc:AnnotationList"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "structures": []
+}

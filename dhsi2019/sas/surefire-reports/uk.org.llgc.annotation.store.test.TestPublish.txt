@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: uk.org.llgc.annotation.store.test.TestPublish
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.708 sec - in uk.org.llgc.annotation.store.test.TestPublish

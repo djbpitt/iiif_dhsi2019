@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: uk.org.llgc.annotation.store.test.TestMirador2
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.971 sec - in uk.org.llgc.annotation.store.test.TestMirador2

@@ -117,3 +117,11 @@ To validate locally, install and run the Tripoli IIIF manifest validator (Python
 
 If your manifest is available at a public URL, you can validate it on line at <https://iiif.io/api/presentation/validator/service/>. 
 
+____
+
+## To do
+
+* Add Chrome web server (<https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en>; check CORS, change port if desired, set web root)
+* Add annotation list and view in Mirador
+* IIIF annotation building tool: <https://ncsu-libraries.github.io/iiif-annotation/>.
+* Simple annotation server <https://iiif.github.io/training/iiif-5-day-workshop/day-three/annotations-stores-install.html>

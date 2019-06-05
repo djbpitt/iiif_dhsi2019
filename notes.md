@@ -247,7 +247,7 @@ Canvas is central to the model. Multiple images may be layered onto an object, a
 
 #### Building a group manifest
 
-<http://dmt.bodleian.ox.ac.uk> and the Bodleian Manifest Editor at <http://dmt.bodleian.ox.ac.uk/manifest-editor/>. In Real Life, manifests are typically automatically generated from images or catalog records. Other tools:
+Bodleian Digital Manuscripts Toolkit <http://dmt.bodleian.ox.ac.uk>, featuring the Bodleian Manifest Editor at <http://dmt.bodleian.ox.ac.uk/manifest-editor/>. In Real Life, manifests are typically automatically generated from images or catalog records. Other tools:
 
 * https://github.com/edsilv/biiif (command line)
 * https://github.com/iiif-prezi/osullivan (Ruby library)
@@ -262,22 +262,31 @@ Under Images,
 
 means that the purpose is to paint the image onto the canvas. It does not mean that the image is a painting.
 
-The "profile" (under "service") is copied from *image.json*, and other properties may be, as well (it helps the viewer, but is optional). Level 1 is zoomable, level 0 is static, level 2 is the most interactive.
+The "profile" (under "service") is copied from *image.json*, and other properties may be, as well (it helps the viewer, but is optional). Level 1 is zoomable, level 0 is static, level 2 is the most interactive. The @id under "service" has to be a reachable URL; it isn’t just a URI. The spec explains when @id values must be resolvable.
 
 Validate manifest locally with <https://github.com/DDMAL/tripoli>.
 
-
-
 #### Building an individual manifest
 
+Create a new manifest in the Bodleian editor, locally or remotely. Run in Firefox; Chrome blocks remote resources.
+
 #### Serving your manifest
+
+<https://iiif.github.io/training/iiif-5-day-workshop/day-two/4-serving-your-manifest.html>
+
+Manifests need to live on the web, and images need to be served by IIIF servers on the web. Start with:
+
+`http-server -p 1234 --cors`
+
+where the value of the `-p` parameter is the port.
 
 #### Viewing your manifest
 
 ### Building a simple gallery viewer
 
-We skip the part about uploading level 0 static images to GitHub and move on to <https://iiif.github.io/training/iiif-5-day-workshop/day-one/creating-a-basic-image-viewer.html>.
+<https://iiif.github.io/training/iiif-5-day-workshop/day-two/6-building-a-gallery-viewer-intro.html>
 
+Plain ol’ web page, with `<img>` elements that point to IIIF images. To find some images, see <https://searchworks.stanford.edu/catalog?f%5Biiif_resources%5D%5B%5D=available>; click on the Network button to drill down to the manifest and drill down to the image URI there. Kinda laborious, no metadata, not very functional. The point of the exercise is that this *isn’t* the way to build an image gallery.
 
 
 

@@ -1,0 +1,107 @@
+{
+	"@context": "http://iiif.io/api/presentation/2/context.json",
+	"@id": "http://36a5046a-46af-461b-b103-9fee22af99d3",
+	"@type": "sc:Manifest",
+	"label": "Sample manifest with dog and tennis ball",
+	"metadata": [],
+	"description": [
+		{
+			"@value": "This is a sample manifest.",
+			"@language": "en"
+		}
+	],
+	"license": "https://creativecommons.org/licenses/by/3.0/",
+	"attribution": "[Click to edit attribution]",
+	"sequences": [
+		{
+			"@id": "http://74bdac8c-9cbe-47e1-8cb7-ff2f377d7d49",
+			"@type": "sc:Sequence",
+			"label": [
+				{
+					"@value": "Normal Sequence",
+					"@language": "en"
+				}
+			],
+			"canvases": [
+				{
+					"@id": "http://b78f0f62-adbd-4092-ba75-5a10af157488",
+					"@type": "sc:Canvas",
+					"label": "Empty canvas",
+					"height": 4032,
+					"width": 3024,
+					"images": [
+						{
+							"@context": "http://iiif.io/api/presentation/2/context.json",
+							"@id": "http://48d762bd-db37-41aa-b2ec-dd2978c989ed",
+							"@type": "oa:Annotation",
+							"motivation": "sc:painting",
+							"resource": {
+								"@id": "http://127.0.0.1:8182/iiif/2/eddie.jpg/full/full/0/default.jpg",
+								"@type": "dctypes:Image",
+								"format": "image/jpeg",
+								"service": {
+									"@context": "http://iiif.io/api/image/2/context.json",
+									"@id": "http://127.0.0.1:8182/iiif/2/eddie.jpg",
+									"profile": [
+										"http://iiif.io/api/image/2/level2.json",
+										{
+											"formats": [
+												"jpg",
+												"tif",
+												"gif",
+												"png"
+											],
+											"maxArea": 12192768,
+											"qualities": [
+												"bitonal",
+												"default",
+												"gray",
+												"color"
+											],
+											"supports": [
+												"regionByPx",
+												"sizeByW",
+												"sizeByWhListed",
+												"cors",
+												"regionSquare",
+												"sizeByDistortedWh",
+												"canonicalLinkHeader",
+												"sizeByConfinedWh",
+												"sizeByPct",
+												"jsonldMediaType",
+												"regionByPct",
+												"rotationArbitrary",
+												"sizeByH",
+												"baseUriRedirect",
+												"rotationBy90s",
+												"profileLinkHeader",
+												"sizeByForcedWh",
+												"sizeByWh",
+												"mirroring"
+											]
+										}
+									]
+								},
+								"height": 4032,
+								"width": 3024
+							},
+							"on": "http://b78f0f62-adbd-4092-ba75-5a10af157488"
+						}
+					],
+					"related": ""
+				},
+				{
+					"@id": "http://8a820164-1b76-46e4-a602-877f8063bde8",
+					"@type": "sc:Canvas",
+					"label": "Empty canvas",
+					"height": 0,
+					"width": 0,
+					"images": [],
+					"related": ""
+				}
+			]
+		}
+	],
+	"structures": [],
+	"viewingDirection": "left-to-right"
+}

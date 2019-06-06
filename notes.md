@@ -373,5 +373,5 @@ IIIF annotation building tool: <https://ncsu-libraries.github.io/iiif-annotation
 
 To specify a port for the simple annotation server, use `java -jar dependency/jetty-runner.jar --port 9090 simpleAnnotationStore.war`
 
-Transkribus will identify coordinates for lines. Not IIIF, but can be exported and reformatted.
+Transkribus (<https://transkribus.eu/Transkribus/>) will identify coordinates for lines. Not IIIF, but can be exported and reformatted.
 `

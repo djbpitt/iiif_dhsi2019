@@ -65,11 +65,20 @@ Runs by default on port 3000; change in *server.js* if desired. Once it is insta
 
 The presentation API is documented at <https://iiif.io/api/presentation/2.1/>.
 
-## HTTP server: npm http-server
+## HTTP server
+
+Two options are the *npm http-server* and the *Chrome server*.
+
+### npm http-server
 
 1. Install the server with `npm install -g http-server`.
 2. Launch in the directory you intend to use as your web root (e.g., above your manifest) with `http-server --cors`. Defaults to port 8080; specify an alternative port with `http-server -p 1234 --cors`.
 3. Visit at <http://localhost:1234>.
+
+### Chrome server
+
+1. Follow the instructions at <https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en> to install the Chrome server. 
+2. In the pop-up, check the box to enable CORS, set the web root, and change the port, if desired.
 
 ## HTTP viewer: Mirador
 
@@ -98,7 +107,6 @@ The server hosting your manifest must be configured for CORS. This is an HTTP se
 	</IfModule>
 	```
 
-
 ## Bypass the IIIF presentation API
 
 The manifest provides access to presentational metadata that may be useful, but the IIIF image server can be used without a IIIF image viewer, providing access to the images in a way that utilizes the image API. To do this, add links in your HTML page the point to IIIF resources using the IIIF image API syntax, e.g., <https://stacks.stanford.edu/image/iiif/hv814gh0574%2F2515057/full/full/0/default.jpg>.
@@ -117,11 +125,37 @@ To validate locally, install and run the Tripoli IIIF manifest validator (Python
 
 If your manifest is available at a public URL, you can validate it on line at <https://iiif.io/api/presentation/validator/service/>. 
 
+## Annotations
+
+### Simple annotation server
+
+Install the simple annotation server by following the instructions at <https://iiif.github.io/training/iiif-5-day-workshop/day-three/annotations-stores-install.html>. The steps (copied from this site) are:
+
+1. Download *sas.zip* from <https://github.com/glenrobson/SimpleAnnotationServer/releases>. Unzip and `cd` into the directory. 
+2. Launch with `java -jar dependency/jetty-runner.jar simpleAnnotationStore.war`. It defaults to port 8080; to specify an alternative port, use `java -jar dependency/jetty-runner.jar --port 9090 simpleAnnotationStore.war`
+1. Launch with `http://localhost:8080/index.html`, which starts a customized version of Mirador 2.
+2. Make a manifest available locally (e.g., in the Chrome HTTP server, at *http://localhost:8887/manifest.json*. Set the manifest-level `@id` value of that manifests to the URI at which it can be accessed, e.g., for the example above, "http://localhost:8887/manifest.json".
+3. Add this manifest to the simple-annotation-server version of Mirador.
+4. Add annotations to the manifest using the Mirador annotation interface.
+5. Navigate to the upload interface of the simple annotation server at *http://localhost:8080/uploadManifest.html* and upload the manifest (e.g., "http://localhost:8887/manifest.json"). This opens a page in the web server, from which you should copy the address, e.g., "http://localhost:8080/search-api/localhost:8887/search".
+6. Add the following section to the manifest after the manifest-level `label` (don’t forget the comma):
+
+	```
+	"service": {
+	    "profile": "http://iiif.io/api/search/0/search",
+	    "@id": "http://localhost:8080/search-api/localhost:8887/search",
+	    "@context": "http://iiif.io/api/search/0/context.json"
+	},
+	```
+The `@id` value must be the URI you copied in the preceding step.
+1. Test the result in the Universal viewer by entering your manifest URI in *http://universalviewer.io/*. It should render a search-box (case sensitive).
+
+### Hosting annotation locally
+
+ADD description from <https://github.com/glenrobson/SimpleAnnotationServer/blob/master/doc/DownloadAnnotations.md>. 
+
 ____
 
 ## To do
 
-* Add Chrome web server (<https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en>; check CORS, change port if desired, set web root)
-* Add annotation list and view in Mirador
 * IIIF annotation building tool: <https://ncsu-libraries.github.io/iiif-annotation/>.
-* Simple annotation server <https://iiif.github.io/training/iiif-5-day-workshop/day-three/annotations-stores-install.html>

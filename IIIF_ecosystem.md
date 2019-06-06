@@ -17,6 +17,7 @@ How to configure local IIIF-related servers, based primarily on information from
 2. Build a manifest automatically for an entire directory of images.
 3. Create tiles for level 0 static images.
 4. Validate a manifest.
+5. Create, edit, or export annotations in the Simple Annotation Editor.
 
 ## Prerequisites
 
@@ -40,8 +41,9 @@ Install Cantaloupe (<https://cantaloupe-project.github.io/>). Make the following
 	```
 3. Launch with `$ java -Dcantaloupe.config=./cantaloupe.properties -Xmx2g -jar Cantaloupe-4.1.2.war`	(change the version number to match your *war* file). 
 4. Change the http and https ports in the configuration file, if desired.
-4. Access at <http://127.0.0.1:8182/iiif/2> (or alternative port).
-5. If you have enabled the admin dashboard, access it at <http://127.0.0.1:8182/admin> (or alternative port).
+5. If hosted on the Internet, open the port on your server.
+4. Access at <http://localhost:8182/iiif/2> (or alternative port).
+5. If you have enabled the admin dashboard, access it at <http://localhost:8182/admin> (or alternative port).
 6. To configure the image directory, in the admin dashboard click on *Source* and then *FilesystemSource*. The image directory does not have to be in the Cantaloupe hierarchy, but something like *./images/* would work (note that the trailing slash is required). If you have not enabled the admin dashboard, you can edit *cantaloupe.properties* manually, changing line 139 to:
 
 	```
@@ -149,6 +151,8 @@ Install the simple annotation server by following the instructions at <https://i
 	```
 The `@id` value must be the URI you copied in the preceding step.
 1. Test the result in the Universal viewer by entering your manifest URI in *http://universalviewer.io/*. It should render a search-box (case sensitive).
+
+If you have a separate annotation lists, you can upload it into the simple annotation server at <http://localhost:8080/populate.html>. See the instructions at <https://github.com/glenrobson/SimpleAnnotationServer/blob/master/doc/PopulatingAnnotations.md>.
 
 ### Hosting annotation locally
 

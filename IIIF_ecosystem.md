@@ -156,7 +156,7 @@ If you have a separate annotation lists, you can upload it into the simple annot
 
 ### Hosting annotation locally
 
-ADD description from <https://github.com/glenrobson/SimpleAnnotationServer/blob/master/doc/DownloadAnnotations.md>. 
+ADD description from <https://github.com/glenrobson/SimpleAnnotationServer/blob/master/doc/DownloadAnnotations.md> and <https://iiif.github.io/training/iiif-5-day-workshop/day-three/annotation-store-download.html>
 
 ____
 

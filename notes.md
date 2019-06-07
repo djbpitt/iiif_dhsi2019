@@ -374,4 +374,51 @@ IIIF annotation building tool: <https://ncsu-libraries.github.io/iiif-annotation
 To specify a port for the simple annotation server, use `java -jar dependency/jetty-runner.jar --port 9090 simpleAnnotationStore.war`
 
 Transkribus (<https://transkribus.eu/Transkribus/>) will identify coordinates for lines. Not IIIF, but can be exported and reformatted.
-`
+
+## 2019-06-06
+
+### Overview of servers
+
+A web server is needed just to serve manifests and annotation lists, which live somewhere on the web. Viewers expect to get them over HTTP, and for simple learning purposes, we can use myjson or Gist. Search functionality also comes off a web server. Level 0 images can come from a regular web server; we practiced this with GitHub.
+
+Level 2 image serving can come from Cantaloupee, Loris, IIP, IIIF Hosting (hosted by a service). Level 0 will zoom, but no other manipulation.
+
+### IIIF and AI/ML
+
+* Outline and narrative: <https://iiif.github.io/training/iiif-5-day-workshop/day-four/iiif-and-ai.html>
+* Colab notebook: <https://colab.research.google.com/drive/10llFSdKa8uK3PVTNwHjxV80mleQ5ZXk2>
+
+The project goals were to 1) detect the locations of annotations and marginalia and 2) classify them by type.
+
+#### Image preparation
+
+Create standardized dataset (gold standard) manually with ImageJ and GIMP. Then switched to Zooniverse crowd-sourcing (<https://www.zooniverse.org/projects/kirschbombe/book-annotation-classification>). Nowadays would use Mirador. 
+
+#### Automated region detection
+
+First step was identify the pages with annotations; finding the regions and classifying the type of annotation was a second step. Now used in the Early Modern Annotated Books from UCLA’s Clark Library (<https://calisphere.org/collections/26771/>), with the goal of provided quick search for annotations.
+
+"Mask Region-based Convolutional Neural Network" (MRCNN) model trained on the crowd-sourced data. The system is called Omniscribe: <https://github.com/collectionslab/omniscribe> (beta). Employs transfer learning to use classification methods developed with one type of data (e.g., cars, people) on another (e.g., pages). Requires GPU or TPU hardware for fast processing. Given a manifest, it can find the images, run annotation detection, and output annotation list that links to regions on pages. 
+
+#### Hands on
+
+Open <https://colab.research.google.com/drive/10llFSdKa8uK3PVTNwHjxV80mleQ5ZXk2> and go to File → Create a copy in Drive to enable editing. Run, using any of the data sets. Works as advertised.
+
+### Mirador 
+
+* Home: <https://projectmirador.org>
+* Live demo of Mirador 3: <https://mirador-dev.netlify.com/>
+* Settings playpen: <https://codepen.io/cazilla11/pen/yWdNMQ>. Shows how to load Mirador remotely into a `<div>`.
+
+Mirador 3 is designed to be configurable: elements can be added or removed without developer skills. Not yet fully functional, e.g., can view annotations but cannot yet create them. Currently OpenSeaDragon is lighter than Mirador.
+
+### Spotlight
+
+CMS and hosting platform at Stanford: <https://exhibits.stanford.edu>. Can use IIIF to incorporate external resources. Embedded viewer is customized instance of OpenSeaDragon (default); can swap in other viewers (e.g., Universal Viewer, Mirador). Parker Library on the Web <https://exhibits.stanford.edu/parker/> embeds Mirador (see <https://exhibits.stanford.edu/parker/feature/hints-and-tips-the-manuscript-viewing-window>).
+
+### Wax
+
+CMS and hosting platform from Columbia: <https://minicomp.github.io/wax/>.  Part of *minimal computing*, with a focus on web preservation. The dynamic and distributed nature of IIIF is challenging for web preservation; how does one create an archival copy? Alex Gil’s announcement: <https://twitter.com/elotroalex/status/1136364277345017857>.
+
+IIIF is optional. Requires a folder full of images (Level 0) and a spreadsheet with one line per image, and it generates an exhibition viewer for the images, with metadata, and a manifest. Zoomable (OpenSeaDragon), but no annotations. Self contained, so can be zipped and preserved. Script-driven, relies on Jekyll.
+
